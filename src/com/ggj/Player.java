@@ -22,7 +22,7 @@ public class Player extends Sprite {
     int SPEED = 100;
     float speed_water = 260f;
     float div = speed_water / 35;
-    Array<Water> waters;
+    Water water;
     boolean canAttack;
     float timerAttack = 0f;
     Vector2 go = new Vector2(speed_water, 0);
@@ -34,7 +34,7 @@ public class Player extends Sprite {
         this.world = world;
         this.camera = camera;
         mousePos = new Vector3(0, 0, 0);
-        waters = new Array<Water>();
+        water = new Water(world, new Vector3(-2000, -2000, 0));
         light = new PointLight(rayHandler, 200, Color.YELLOW, 35, -1000, -10000);
         createCollision();
     }
@@ -95,8 +95,8 @@ public class Player extends Sprite {
 
 
 
-            waters.add(new Water(world, new Vector3(body.getPosition().x +
-                    go.x/div, body.getPosition().y + go.y/div, 0), go));
+            water.gogo(new Vector3(body.getPosition().x +
+                    go.x/div, body.getPosition().y + go.y/div, 0), go);
         }
     }
 }

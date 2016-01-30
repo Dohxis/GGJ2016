@@ -14,19 +14,10 @@ public class Water {
     Body body;
     Vector3 startPosition;
 
-    public Water(final World world, Vector3 pos, Vector2 go){
+    public Water(final World world, Vector3 pos){
         this.world = world;
         this.startPosition = pos;
         createCollision();
-        body.applyLinearImpulse(go, body.getWorldCenter(), true);
-        Timer.schedule(new Timer.Task(){
-            @Override
-            public void run() {
-                world.destroyBody(body);
-            }
-        }, 1f);
-
-
     }
 
     private void createCollision() {
@@ -41,6 +32,18 @@ public class Water {
 
         fixtureDef.shape = shape;
         body.createFixture(fixtureDef);
+    }
+
+    public void gogo(Vector3 pos, Vector2 go){
+        body.setTransform(pos.x, pos.y, 0);
+        body.applyLinearImpulse(go, body.getWorldCenter(), true);
+        Timer.schedule(new Timer.Task(){
+            @Override
+            public void run() {
+                body.setTransform(-2000f, -2000f, 0);
+                body.setLinearVelocity(new Vector2(0, 0));
+            }
+        }, 1f);
     }
 
 }

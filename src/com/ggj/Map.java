@@ -43,13 +43,13 @@ public class Map {
 
         // houses
 
-        for(int i=0; i < numOfHouses; i++){
-            int houseX = (10) + (int)(Math.random() * (((width - houseSizeX - 10) - (10)) + 1));
-            int houseY = 10 + (int)(Math.random() * ((houseX - 10) + 1));
-            if(!isOccupiedByHouses(i, houseX, houseY)){
-                createCollision(houseX, houseY, houseSizeX, houseSizeY);
-                houses.add(new House(houseX, houseY, false));
-                PointLight light = new PointLight(rayHandler, 100, new Color(1, 1, 0, .5f), 150, houseX, houseY);
+            for(int i=0; i < numOfHouses; i++){
+                int houseX = (10) + (int)(Math.random() * (((width - houseSizeX - 10) - (10)) + 1));
+                int houseY = 10 + (int)(Math.random() * ((houseX - 10) + 1));
+                if(!isOccupiedByHouses(i, houseX, houseY)){
+                    createCollision(houseX, houseY, houseSizeX, houseSizeY);
+                    houses.add(new House(houseX, houseY, false));
+                    PointLight light = new PointLight(rayHandler, 100, new Color(1, 1, 0, .5f), 150, houseX, houseY);
             }
             else{
                 //System.out.println("Failed");
