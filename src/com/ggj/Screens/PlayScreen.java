@@ -11,10 +11,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.ggj.Game;
-import com.ggj.Map;
-import com.ggj.Player;
-import com.ggj.Random;
+import com.ggj.*;
 
 public class PlayScreen implements Screen {
 
@@ -30,6 +27,8 @@ public class PlayScreen implements Screen {
     Player player;
     Random enemy;
     Texture bg;
+
+    Pagan pagan;
 
     public PlayScreen(Game game) {
         // 640 480
@@ -51,6 +50,7 @@ public class PlayScreen implements Screen {
         map = new Map(world, rayHandler);
         map.generate();
 
+        pagan = new Pagan(world, 100, 50, true);
     }
 
     @Override
@@ -73,13 +73,13 @@ public class PlayScreen implements Screen {
 
         game.batch.draw(bg,0, 0);
         map.renderAll(game.batch);
+        pagan.update(game.batch, Gdx.graphics.getDeltaTime(), player.body);
         game.batch.end();
 
         box2DDebugRenderer.render(world, camera.combined);
         rayHandler.setCombinedMatrix(camera);
         rayHandler.updateAndRender();
         game.batch.setProjectionMatrix(camera.combined);
-
     }
 
     @Override
