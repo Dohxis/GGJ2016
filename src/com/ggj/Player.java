@@ -20,7 +20,7 @@ public class Player extends Sprite {
     OrthographicCamera camera;
     Vector3 mousePos;
     int SPEED = 100;
-    int canShoot = 3;
+    int canShoot = 20;
     int shooted = 0;
     float speed_water = 260f;
     float div = speed_water / 35;
@@ -90,9 +90,7 @@ public class Player extends Sprite {
     }
 
     public void shoot(){
-        if(Gdx.input.isTouched() && canAttack && shooted < canShoot){
-            mousePos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-            camera.unproject(mousePos);
+        if(Gdx.input.isKeyPressed(Input.Keys.SPACE) && canAttack && shooted <= canShoot){
             canAttack = false;
 
 

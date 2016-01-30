@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.ggj.*;
@@ -19,6 +21,8 @@ public class PlayScreen implements Screen {
     OrthographicCamera camera;
     Viewport viewport;
     RayHandler rayHandler;
+    Stage stage;
+    Table table;
 
     World world;
     Box2DDebugRenderer box2DDebugRenderer;
@@ -33,6 +37,7 @@ public class PlayScreen implements Screen {
     public PlayScreen(Game game) {
         // 640 480
         this.game = game;
+
         bg = new Texture("map.png");
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -71,15 +76,19 @@ public class PlayScreen implements Screen {
         player.render(game.batch);
         enemy.renderRandom(game.batch);
 
+
+
         game.batch.draw(bg,0, 0);
         map.renderAll(game.batch);
         pagan.update(game.batch, Gdx.graphics.getDeltaTime(), player.water.body);
+        player.water.render(game.batch);
         game.batch.end();
 
         box2DDebugRenderer.render(world, camera.combined);
         rayHandler.setCombinedMatrix(camera);
         rayHandler.updateAndRender();
         game.batch.setProjectionMatrix(camera.combined);
+
     }
 
     @Override
@@ -98,7 +107,7 @@ public class PlayScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        stage.dispose();
 
     }
 

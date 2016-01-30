@@ -1,11 +1,14 @@
 package com.ggj;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Timer;
 
-public class Water {
+public class Water extends Sprite {
 
     float DISAPEAR = .5f;
     int SPEED = 1000;
@@ -15,6 +18,7 @@ public class Water {
     Vector3 startPosition;
 
     public Water(final World world, Vector3 pos){
+        super(new Texture("shot.png"));
         this.world = world;
         this.startPosition = pos;
         createCollision();
@@ -44,6 +48,11 @@ public class Water {
                 body.setLinearVelocity(new Vector2(0, 0));
             }
         }, 1f);
+    }
+
+    public void render(SpriteBatch batch){
+        setPosition((body.getPosition().x - 8), (body.getPosition().y - 8));
+        draw(batch);
     }
 
 }
