@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.ggj.Game;
 import com.ggj.Map;
 import com.ggj.Player;
+import com.ggj.Random;
 
 public class PlayScreen implements Screen {
 
@@ -23,6 +24,7 @@ public class PlayScreen implements Screen {
     Box2DDebugRenderer box2DDebugRenderer;
 
     Player player;
+    Random enemy;
 
     public PlayScreen(Game game){
         this.game = game;
@@ -34,6 +36,7 @@ public class PlayScreen implements Screen {
         box2DDebugRenderer = new Box2DDebugRenderer();
 
         player = new Player(world, camera);
+        enemy = new Random("", world, true, 200, 100, 30);
 
         Map map = new Map(world);
         map.generate();
@@ -56,6 +59,7 @@ public class PlayScreen implements Screen {
 
         game.batch.begin();
         player.render(game.batch);
+        enemy.renderRandom(game.batch);
         game.batch.end();
 
         box2DDebugRenderer.render(world, camera.combined);
