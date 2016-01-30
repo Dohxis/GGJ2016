@@ -48,7 +48,7 @@ public class Map {
                 int houseY = 10 + (int)(Math.random() * ((houseX - 10) + 1));
                 if(!isOccupiedByHouses(i, houseX, houseY)){
                     createCollision(houseX, houseY, houseSizeX, houseSizeY);
-                    houses.add(new House(houseX, houseY, false));
+                    houses.add(new House(houseX, houseY));
                     PointLight light = new PointLight(rayHandler, 100, new Color(1, 1, 0, .5f), 150, houseX, houseY);
             }
             else{

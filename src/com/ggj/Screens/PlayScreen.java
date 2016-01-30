@@ -50,7 +50,7 @@ public class PlayScreen implements Screen {
         map = new Map(world, rayHandler);
         map.generate();
 
-        pagan = new Pagan(world, 100, 50, true);
+        pagan = new Pagan(world, 100, 50, rayHandler, true);
     }
 
     @Override

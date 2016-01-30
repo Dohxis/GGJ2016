@@ -1,6 +1,9 @@
 package com.ggj;
 
 
+import box2dLight.PointLight;
+import box2dLight.RayHandler;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
@@ -14,19 +17,22 @@ public class Pagan {
     double time = 0;
     World world;
     Body body;
+    RayHandler rayHandler;
+    PointLight light;
 
-    int adultSpeed = 25;
-    int adultSize = 20;
+    int adultSpeed = 30;
+    int adultSize = 10;
 
-    int childSpeed;
-    int childSize;
+    int childSpeed = 60;
+    int childSize = 7;
 
     int paganSpeed;
     int paganSize;
 
 
-    public Pagan(World world, int x, int y, boolean isAdult){
+    public Pagan(World world, int x, int y, RayHandler rayHandler, boolean isAdult){
         this.world = world;
+        this.rayHandler = rayHandler;
         if(isAdult){
             paganSpeed = adultSpeed;
             paganSize = adultSize;
@@ -58,17 +64,17 @@ public class Pagan {
         Rectangle paganRekt = new Rectangle(body.getPosition().x-25, body.getPosition().y-25, paganSize+50, paganSize+50);
         Rectangle rekt = new Rectangle(waterBody.getPosition().x, waterBody.getPosition().y, 10, 10);
 
-        if(/*!isChristian && */paganRekt.overlaps(rekt)){
+        if(!isChristian && paganRekt.overlaps(rekt)){
             isChristian = true;
-            System.out.println("blah");
-            //create light
+            light = new PointLight(rayHandler, 100, new Color(1, 1, 0, .5f), 150, body.getPosition().x, body.getPosition().y);
+            System.out.println("wow");
         }
 
         if(isChristian){
-            //move light
+            light.setPosition(body.getPosition().x, body.getPosition().y);
         }
 
-        if(time > 1){
+        if(time > 2){
             isIdle = !isIdle;
             direction = 0 + (int)(Math.random() * ((3 - 0) + 1));
             time = 0;
