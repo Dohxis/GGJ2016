@@ -32,7 +32,7 @@ public class PlayScreen implements Screen {
         world = new World(new Vector2(0, 0), true);
         box2DDebugRenderer = new Box2DDebugRenderer();
 
-        player = new Player(world);
+        player = new Player(world, camera);
     }
 
     @Override
@@ -42,6 +42,9 @@ public class PlayScreen implements Screen {
 
     @Override
     public void render(float delta) {
+
+        world.step(1 / 60f, 6, 2);
+        camera.update();
 
         Gdx.gl.glClearColor(0f, 0f, 0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -58,7 +61,7 @@ public class PlayScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-
+        viewport.update(width, height);
     }
 
     @Override
