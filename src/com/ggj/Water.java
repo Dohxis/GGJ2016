@@ -24,7 +24,7 @@ public class Water {
             public void run() {
                 world.destroyBody(body);
             }
-        }, 2f);
+        }, 1f);
 
 
     }

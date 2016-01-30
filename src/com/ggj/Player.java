@@ -16,13 +16,13 @@ public class Player extends Sprite {
     public Body body;
     OrthographicCamera camera;
     Vector3 mousePos;
-    Vector2 go = new Vector2(0, 0);
     int SPEED = 100;
     float speed_water = 260f;
     float div = speed_water / 35;
     Array<Water> waters;
     boolean canAttack;
     float timerAttack = 0f;
+    Vector2 go = new Vector2(speed_water, 0);
     float x = 0, y = 0;
 
     public Player(World world, OrthographicCamera camera){
@@ -51,7 +51,7 @@ public class Player extends Sprite {
         controls();
         shoot();
         timerAttack += Gdx.graphics.getDeltaTime();
-        if(timerAttack > .5f && !Gdx.input.isTouched()){
+        if(timerAttack > 1f && !Gdx.input.isTouched()){
             canAttack = true;
             timerAttack = 0f;
         }

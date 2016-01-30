@@ -1,5 +1,6 @@
 package com.ggj;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -9,11 +10,11 @@ import com.badlogic.gdx.utils.Array;
 
 
 public class Map {
-    public int width = 400;
-    public int height = 400;
-    public int numOfHouses = 7;
-    public int houseSizeX = 10;
-    public int houseSizeY = 20;
+    public int width = Gdx.graphics.getWidth();
+    public int height = Gdx.graphics.getHeight();
+    public int numOfHouses = 5;
+    public int houseSizeX = 20;
+    public int houseSizeY = 50;
 
     Array<House> houses;
 
