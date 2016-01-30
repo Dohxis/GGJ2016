@@ -62,7 +62,7 @@ public class Pagan {
         time += deltaTime;
 
         Rectangle paganRekt = new Rectangle(body.getPosition().x-25, body.getPosition().y-25, paganSize+50, paganSize+50);
-        Rectangle rekt = new Rectangle(waterBody.getPosition().x, waterBody.getPosition().y, 10, 10);
+        Rectangle rekt = new Rectangle(waterBody.getPosition().x, waterBody.getPosition().y, 5, 5);
 
         if(!isChristian && paganRekt.overlaps(rekt)){
             isChristian = true;

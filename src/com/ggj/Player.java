@@ -24,7 +24,7 @@ public class Player extends Sprite {
     int shooted = 0;
     float speed_water = 260f;
     float div = speed_water / 35;
-    Water water;
+    public Water water;
     boolean canAttack;
     float timerAttack = 0f;
     Vector2 go = new Vector2(speed_water, 0);
