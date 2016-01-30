@@ -10,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.ggj.Game;
+import com.ggj.Map;
 import com.ggj.Player;
 
 public class PlayScreen implements Screen {
@@ -33,6 +34,10 @@ public class PlayScreen implements Screen {
         box2DDebugRenderer = new Box2DDebugRenderer();
 
         player = new Player(world, camera);
+
+        Map map = new Map(world);
+        map.generate();
+
     }
 
     @Override
