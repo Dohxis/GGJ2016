@@ -27,6 +27,7 @@ public class PlayScreen implements Screen {
     Random enemy;
 
     public PlayScreen(Game game){
+        // 640 480
         this.game = game;
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -79,6 +80,14 @@ public class PlayScreen implements Screen {
     }
 
     @Override
+    }
+
+    @Override
+    public void dispose() {
+
+
+    }
+}
     public void resume() {
 
     }
@@ -86,10 +95,3 @@ public class PlayScreen implements Screen {
     @Override
     public void hide() {
 
-    }
-
-    @Override
-    public void dispose() {
-
-    }
-}
