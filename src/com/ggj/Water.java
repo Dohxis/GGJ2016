@@ -11,7 +11,7 @@ public class Water {
     int SPEED = 1000;
     float div = 1;
     World world;
-    Body body;
+    public Body body;
     Vector3 startPosition;
 
     public Water(final World world, Vector3 pos){
