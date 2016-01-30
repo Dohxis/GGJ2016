@@ -1,7 +1,10 @@
 package com.ggj;
 
+import box2dLight.PointLight;
+import box2dLight.RayHandler;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -23,13 +26,16 @@ public class Player extends Sprite {
     boolean canAttack;
     float timerAttack = 0f;
     Vector2 go = new Vector2(speed_water, 0);
-    float x = 0, y = 0;
+    RayHandler rayHandler;
+    PointLight light;
 
-    public Player(World world, OrthographicCamera camera){
+    public Player(World world, OrthographicCamera camera, RayHandler rayHandler){
+        this.rayHandler = rayHandler;
         this.world = world;
         this.camera = camera;
         mousePos = new Vector3(0, 0, 0);
         waters = new Array<Water>();
+        light = new PointLight(rayHandler, 200, Color.YELLOW, 35, -1000, -10000);
         createCollision();
     }
 
@@ -48,6 +54,7 @@ public class Player extends Sprite {
     }
 
     public void render(SpriteBatch batch){
+        light.setPosition(body.getPosition().x, body.getPosition().y);
         controls();
         shoot();
         timerAttack += Gdx.graphics.getDeltaTime();

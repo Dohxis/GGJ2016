@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.ggj.Screens.MenuScreen;
 import com.ggj.Screens.PlayScreen;
+import com.ggj.Screens.WinLose;
 
 public class Game extends com.badlogic.gdx.Game {
 	public SpriteBatch batch;

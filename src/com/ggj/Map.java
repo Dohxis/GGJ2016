@@ -1,6 +1,9 @@
 package com.ggj;
 
+import box2dLight.PointLight;
+import box2dLight.RayHandler;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -20,10 +23,12 @@ public class Map {
     Array<House> houses;
 
     World world;
+    RayHandler rayHandler;
 
-    public Map(World world){
+    public Map(World world, RayHandler rayHandler){
         this.world = world;
         houses = new Array<House>();
+        this.rayHandler = rayHandler;
     }
 
 
@@ -44,6 +49,7 @@ public class Map {
             if(!isOccupiedByHouses(i, houseX, houseY)){
                 createCollision(houseX, houseY, houseSizeX, houseSizeY);
                 houses.add(new House(houseX, houseY, false));
+                PointLight light = new PointLight(rayHandler, 100, new Color(1, 1, 0, .5f), 150, houseX, houseY);
             }
             else{
                 //System.out.println("Failed");

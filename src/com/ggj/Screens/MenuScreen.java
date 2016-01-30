@@ -9,9 +9,6 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.ggj.Game;
 
-/**
- * Created by Moneikis on 2016-01-30.
- */
 public class MenuScreen implements Screen {
 
     Texture playBtn;

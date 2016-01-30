@@ -1,5 +1,6 @@
 package com.ggj.Screens;
 
+import box2dLight.RayHandler;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -20,6 +21,7 @@ public class PlayScreen implements Screen {
     Game game;
     OrthographicCamera camera;
     Viewport viewport;
+    RayHandler rayHandler;
 
     World world;
     Box2DDebugRenderer box2DDebugRenderer;
@@ -40,10 +42,13 @@ public class PlayScreen implements Screen {
         world = new World(new Vector2(0, 0), true);
         box2DDebugRenderer = new Box2DDebugRenderer();
 
-        player = new Player(world, camera);
-        enemy = new Random("", world, true, 200, 100, 30);
 
-        map = new Map(world);
+        enemy = new Random("", world, true, 200, 100, 30);
+        rayHandler = new RayHandler(world);
+        rayHandler.setAmbientLight(0f, 0f, 0f, 0.1f);
+        player = new Player(world, camera, rayHandler);
+
+        map = new Map(world, rayHandler);
         map.generate();
 
     }
@@ -71,7 +76,8 @@ public class PlayScreen implements Screen {
         game.batch.end();
 
         box2DDebugRenderer.render(world, camera.combined);
-
+        rayHandler.setCombinedMatrix(camera);
+        rayHandler.updateAndRender();
         game.batch.setProjectionMatrix(camera.combined);
 
     }
