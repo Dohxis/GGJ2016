@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
@@ -22,13 +23,16 @@ public class PlayScreen implements Screen {
 
     World world;
     Box2DDebugRenderer box2DDebugRenderer;
+    Map map;
 
     Player player;
     Random enemy;
+    Texture bg;
 
-    public PlayScreen(Game game){
+    public PlayScreen(Game game) {
         // 640 480
         this.game = game;
+        bg = new Texture("map.png");
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         viewport = new StretchViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
@@ -39,7 +43,7 @@ public class PlayScreen implements Screen {
         player = new Player(world, camera);
         enemy = new Random("", world, true, 200, 100, 30);
 
-        Map map = new Map(world);
+        map = new Map(world);
         map.generate();
 
     }
@@ -61,6 +65,9 @@ public class PlayScreen implements Screen {
         game.batch.begin();
         player.render(game.batch);
         enemy.renderRandom(game.batch);
+
+        game.batch.draw(bg,0, 0);
+        map.renderAll(game.batch);
         game.batch.end();
 
         box2DDebugRenderer.render(world, camera.combined);
@@ -80,6 +87,7 @@ public class PlayScreen implements Screen {
     }
 
     @Override
+    public void resume() {
     }
 
     @Override
@@ -87,11 +95,9 @@ public class PlayScreen implements Screen {
 
 
     }
-}
-    public void resume() {
-
-    }
 
     @Override
     public void hide() {
+    }
+}
 

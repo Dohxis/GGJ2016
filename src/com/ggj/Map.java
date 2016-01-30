@@ -1,6 +1,7 @@
 package com.ggj;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -12,9 +13,9 @@ import com.badlogic.gdx.utils.Array;
 public class Map {
     public int width = Gdx.graphics.getWidth();
     public int height = Gdx.graphics.getHeight();
-    public int numOfHouses = 5;
-    public int houseSizeX = 20;
-    public int houseSizeY = 50;
+    public int numOfHouses = 4;
+    public int houseSizeX = 31;
+    public int houseSizeY = 25;
 
     Array<House> houses;
 
@@ -45,7 +46,7 @@ public class Map {
                 houses.add(new House(houseX, houseY, false));
             }
             else{
-                System.out.println("Failed");
+                //System.out.println("Failed");
                 i--;
             }
         }
@@ -74,5 +75,11 @@ public class Map {
             if(Math.abs(houseX - houses.get(i).x) < houseSizeX*3 && Math.abs(houseY - houses.get(i).y) < houseSizeY*3) occupied = true;
         }
         return occupied;
+    }
+
+    public void renderAll(SpriteBatch batch){
+        for(int i = 0; i < houses.size; i++){
+            houses.get(i).render(batch);
+        }
     }
 }
