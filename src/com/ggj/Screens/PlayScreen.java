@@ -48,7 +48,8 @@ public class PlayScreen implements Screen {
         box2DDebugRenderer = new Box2DDebugRenderer();
 
 
-        enemy = new Enemy(world, 100, 50);
+        enemy = new Enemy(world, 250, 250);
+
         rayHandler = new RayHandler(world);
         rayHandler.setAmbientLight(0f, 0f, 0f, 0.1f);
         player = new Player(world, camera, rayHandler);
@@ -75,6 +76,7 @@ public class PlayScreen implements Screen {
 
         game.batch.begin();
         player.render(game.batch);
+
         enemy.update(player.body.getPosition().x, player.body.getPosition().y);
 
 

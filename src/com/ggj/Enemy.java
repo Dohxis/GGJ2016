@@ -7,8 +7,8 @@ public class Enemy {
     Body body;
 
     int x, y;
-    int enemySizze = 20;
-    int enemySpeed = 10;
+    int enemySize = 10;
+    int enemySpeed = 50;
 
     int killRadius;
 
@@ -20,7 +20,7 @@ public class Enemy {
     }
 
     public void update(float playerX, float playerY){
-
+        goToTarget(playerX, playerY);
     }
 
     double distance2d(){
@@ -35,18 +35,19 @@ public class Enemy {
 
     }
 
-    void goToTarget(int targetX, int tergetY){
-        if(x - targetX < 0){
-            body.setLinearVelocity(10, 0);
+    void goToTarget(float targetX, float targetY){
+
+        if(body.getPosition().x - targetX < -10){
+            body.setLinearVelocity(enemySpeed, 0);
         }
-        if(x - targetX > 0){
-            body.setLinearVelocity(-10, 0);
+        else if(body.getPosition().x - targetX > 10){
+            body.setLinearVelocity(-enemySpeed, 0);
         }
-        if(y - targetX < 0){
-            body.setLinearVelocity(0, 10);
+        else if(body.getPosition().y - targetY < -10){
+            body.setLinearVelocity(0, enemySpeed);
         }
-        if(y - targetX > 0){
-            body.setLinearVelocity(0, -10);
+        else if(body.getPosition().y - targetY > 10){
+            body.setLinearVelocity(0, -enemySpeed);
         }
     }
 
@@ -58,7 +59,7 @@ public class Enemy {
 
         FixtureDef fixtureDef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(enemySizze, enemySizze);
+        shape.setAsBox(enemySize, enemySize);
 
         fixtureDef.shape = shape;
         body.createFixture(fixtureDef);
