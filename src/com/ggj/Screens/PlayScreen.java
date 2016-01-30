@@ -11,6 +11,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.compression.lzma.Encoder;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.ggj.*;
@@ -29,7 +30,7 @@ public class PlayScreen implements Screen {
     Map map;
 
     Player player;
-    Random enemy;
+    Enemy enemy;
     Texture bg;
 
     Pagan pagan;
@@ -47,7 +48,7 @@ public class PlayScreen implements Screen {
         box2DDebugRenderer = new Box2DDebugRenderer();
 
 
-        enemy = new Random("", world, true, 200, 100, 30);
+        enemy = new Enemy(world, 100, 50);
         rayHandler = new RayHandler(world);
         rayHandler.setAmbientLight(0f, 0f, 0f, 0.1f);
         player = new Player(world, camera, rayHandler);
@@ -74,7 +75,7 @@ public class PlayScreen implements Screen {
 
         game.batch.begin();
         player.render(game.batch);
-        enemy.renderRandom(game.batch);
+        enemy.update(player.body.getPosition().x, player.body.getPosition().y);
 
 
 
