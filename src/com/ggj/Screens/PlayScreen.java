@@ -81,7 +81,7 @@ public class PlayScreen implements Screen {
 
 
 
-        game.batch.draw(bg,0, 0);
+        game.batch.draw(bg,0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         map.renderAll(game.batch);
         pagan.update(game.batch, Gdx.graphics.getDeltaTime(), player.water.body);
         player.water.render(game.batch);

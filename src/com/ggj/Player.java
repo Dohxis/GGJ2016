@@ -43,7 +43,7 @@ public class Player extends Sprite {
 
     private void createCollision(){
         BodyDef bodyDef = new BodyDef();
-        bodyDef.position.set(100 / 2, 380 / 2);
+        bodyDef.position.set(50, 400);
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         body = world.createBody(bodyDef);
 
