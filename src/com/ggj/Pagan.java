@@ -33,7 +33,7 @@ public class Pagan extends Sprite {
 
 
     public Pagan(World world, int x, int y, RayHandler rayHandler, boolean isAdult){
-        super(new Texture("Pagonis2.png"));
+        super(new Texture("Pagonis3.png"));
         setScale(.7f, .7f);
         this.world = world;
         this.rayHandler = rayHandler;

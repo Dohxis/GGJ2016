@@ -1,5 +1,7 @@
 package com.ggj;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -16,6 +18,7 @@ public class Water extends Sprite {
     World world;
     public Body body;
     Vector3 startPosition;
+    Sound sound = Gdx.audio.newSound(Gdx.files.internal("Water.wav"));
 
     public Water(final World world, Vector3 pos){
         super(new Texture("shot.png"));
@@ -39,6 +42,7 @@ public class Water extends Sprite {
     }
 
     public void gogo(Vector3 pos, Vector2 go){
+        sound.play(1.0f);
         body.setTransform(pos.x, pos.y, 0);
         body.applyLinearImpulse(go, body.getWorldCenter(), true);
         Timer.schedule(new Timer.Task(){
