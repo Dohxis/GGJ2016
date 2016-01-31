@@ -23,6 +23,8 @@ public class Map {
     int numOfPagans = 5;
     int numOfEnemies = 5;
 
+    Game game;
+
     Array<House> houses;
     Array<Pagan> pagans;
     Array<Enemy> enemies;
@@ -71,7 +73,7 @@ public class Map {
 
         // enemies
         for(int i=0; i<numOfEnemies; i++){
-            enemies.add(new Enemy(world, 10 + (int)(Math.random() * ((width-10 - 10) + 1)), 10 + (int)(Math.random() * ((height-10 - 10) + 1))));
+            enemies.add(new Enemy(world, 10 + (int)(Math.random() * ((width-10 - 10) + 1)), 10 + (int)(Math.random() * ((height-10 - 10) + 1)), game));
         }
 
     }

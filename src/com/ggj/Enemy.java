@@ -1,10 +1,11 @@
 package com.ggj;
 
-import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.*;
+import com.ggj.Screens.WinLose;
 
 public class Enemy extends Sprite {
     World world;
@@ -14,7 +15,7 @@ public class Enemy extends Sprite {
     int enemySize = 10;
     int enemySpeed = 50;
 
-    int killRadius;
+    int killRadius = 40;
 
     boolean hasMoved = false;
     double timeSinceMoved = 0;
@@ -22,13 +23,17 @@ public class Enemy extends Sprite {
 
     boolean change = false;
 
-    public Enemy(World world, int x, int y){
+    Game game;
+
+    public Enemy(World world, int x, int y, Game game){
         super(new Texture("Pagonis2.png"));
         setScale(.8f, .8f);
         this.world = world;
         this.x = x;
         this.y = y;
         createCollision(x, y);
+
+        this.game = game;
     }
 
     public void update(SpriteBatch batch, float playerX, float playerY){
@@ -36,6 +41,9 @@ public class Enemy extends Sprite {
         draw(batch);
         setPosition(body.getPosition().x - 20, body.getPosition().y - 33);
         follow(playerX, playerY);
+        if(distance2d(body.getPosition().x, body.getPosition().y, playerX, playerY) <= killRadius){
+            game.setScreen(new WinLose(game, false));
+        }
     }
 
     void moved(){
@@ -55,8 +63,8 @@ public class Enemy extends Sprite {
         }
     }
 
-    double distance2d(){
-       return 1.0;
+    double distance2d(float aX, float aY, float bX, float bY){
+       return Math.sqrt((aX-bX)*(aX-bX) + (aY-bY)*(aY-bY));
     }
 
     void follow(float playerX, float playerY){
