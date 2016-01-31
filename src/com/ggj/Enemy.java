@@ -24,6 +24,7 @@ public class Enemy extends Sprite {
 
     public Enemy(World world, int x, int y){
         super(new Texture("Pagonis2.png"));
+        setScale(.8f, .8f);
         this.world = world;
         this.x = x;
         this.y = y;
@@ -106,7 +107,7 @@ public class Enemy extends Sprite {
 
         FixtureDef fixtureDef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(10, 29);
+        shape.setAsBox(10, 23);
 
         fixtureDef.shape = shape;
         body.createFixture(fixtureDef);
