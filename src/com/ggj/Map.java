@@ -16,11 +16,16 @@ import com.badlogic.gdx.utils.Array;
 public class Map {
     public int width = Gdx.graphics.getWidth();
     public int height = Gdx.graphics.getHeight();
-    public int numOfHouses = 4;
+    public int numOfHouses = 10;
     public int houseSizeX = 31;
     public int houseSizeY = 25;
 
+    int numOfPagans = 5;
+    int numOfEnemies = 5;
+
     Array<House> houses;
+    Array<Pagan> pagans;
+    Array<Enemy> enemies;
 
     World world;
     RayHandler rayHandler;
@@ -28,6 +33,8 @@ public class Map {
     public Map(World world, RayHandler rayHandler){
         this.world = world;
         houses = new Array<House>();
+        pagans = new Array<Pagan>();
+        enemies = new Array<Enemy>();
         this.rayHandler = rayHandler;
     }
 
@@ -44,8 +51,8 @@ public class Map {
         // houses
 
             for(int i=0; i < numOfHouses; i++){
-                int houseX = (10) + (int)(Math.random() * (((width - houseSizeX - 10) - (10)) + 1));
-                int houseY = 10 + (int)(Math.random() * ((houseX - 10) + 1));
+                int houseX = (50) + (int)(Math.random() * (((width - houseSizeX - 50) - (50)) + 1));
+                int houseY = (50) + (int)(Math.random() * (((height - houseSizeY - 50) - (50)) + 1));
                 if(!isOccupiedByHouses(i, houseX, houseY)){
                     createCollision(houseX, houseY, houseSizeX, houseSizeY);
                     houses.add(new House(houseX, houseY));
@@ -57,7 +64,15 @@ public class Map {
             }
         }
 
-        // fires
+        // pagans
+        for(int i=0; i<numOfPagans; i++){
+            pagans.add(new Pagan(world, 10 + (int)(Math.random() * ((width-10 - 10) + 1)), 10 + (int)(Math.random() * ((height-10 - 10) + 1)), rayHandler, true));
+        }
+
+        // enemies
+        for(int i=0; i<numOfEnemies; i++){
+            enemies.add(new Enemy(world, 10 + (int)(Math.random() * ((width-10 - 10) + 1)), 10 + (int)(Math.random() * ((height-10 - 10) + 1))));
+        }
 
     }
 
@@ -83,9 +98,21 @@ public class Map {
         return occupied;
     }
 
-    public void renderAll(SpriteBatch batch){
+    public void renderAll(SpriteBatch batch, Body waterBody, float playerX, float playerY){
         for(int i = 0; i < houses.size; i++){
             houses.get(i).render(batch);
+        }
+
+        //enemy.update(player.body.getPosition().x, player.body.getPosition().y);
+
+        // pagans
+        for(int i=0; i<numOfPagans; i++){
+            pagans.get(i).update(batch, Gdx.graphics.getDeltaTime(), waterBody);
+        }
+
+        // enemies
+        for(int i=0; i<numOfEnemies; i++){
+            enemies.get(i).update(playerX, playerY);
         }
     }
 }
