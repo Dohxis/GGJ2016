@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -23,7 +24,7 @@ public class Player extends Sprite {
     int canShoot = 20;
     int shooted = 0;
     float speed_water = 260f;
-    float div = speed_water / 35;
+    float div = speed_water / 20;
     public Water water;
     boolean canAttack;
     float timerAttack = 0f;
@@ -32,6 +33,7 @@ public class Player extends Sprite {
     PointLight light;
 
     public Player(World world, OrthographicCamera camera, RayHandler rayHandler){
+        super(new Texture("Pagonis.png"));
         this.rayHandler = rayHandler;
         this.world = world;
         this.camera = camera;
@@ -49,7 +51,7 @@ public class Player extends Sprite {
 
         FixtureDef fixtureDef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(10, 10);
+        shape.setAsBox(10, 29);
 
         fixtureDef.shape = shape;
         body.createFixture(fixtureDef);
@@ -57,6 +59,8 @@ public class Player extends Sprite {
 
     public void render(SpriteBatch batch){
         light.setPosition(body.getPosition().x, body.getPosition().y);
+        setPosition(body.getPosition().x - 20, body.getPosition().y - 33);
+        draw(batch);
         controls();
         shoot();
         timerAttack += Gdx.graphics.getDeltaTime();
@@ -78,10 +82,14 @@ public class Player extends Sprite {
         }
         if(Gdx.input.isKeyPressed(Input.Keys.A)){
             body.applyLinearImpulse(new Vector2(-SPEED, 0), body.getWorldCenter(), true);
+            if(!isFlipX())
+                setFlip(true, false);
             go.set(-speed_water, 0);
         }
         if(Gdx.input.isKeyPressed(Input.Keys.D)){
             body.applyLinearImpulse(new Vector2(SPEED, 0), body.getWorldCenter(), true);
+            if(isFlipX())
+                setFlip(false, false);
             go.set(speed_water, 0);
         }
         if(!Gdx.input.isKeyPressed(Input.Keys.S) && !Gdx.input.isKeyPressed(Input.Keys.W) && !Gdx.input.isKeyPressed(Input.Keys.D) && !Gdx.input.isKeyPressed(Input.Keys.A)){
@@ -90,7 +98,7 @@ public class Player extends Sprite {
     }
 
     public void shoot(){
-        if(Gdx.input.isKeyPressed(Input.Keys.SPACE) && canAttack && shooted <= canShoot){
+        if(Gdx.input.isKeyPressed(Input.Keys.SPACE) && canAttack){
             canAttack = false;
 
 

@@ -9,6 +9,7 @@ public class House extends Sprite{
 
     public House(int x, int y){
         super(new Texture("house.png"));
+        setSize(63, 52);
         this.x = x;
         this.y = y;
         setPosition(x - 30, y - 25);
