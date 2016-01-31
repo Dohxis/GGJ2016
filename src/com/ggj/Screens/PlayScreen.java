@@ -28,14 +28,17 @@ public class PlayScreen implements Screen {
     Box2DDebugRenderer box2DDebugRenderer;
     Map map;
 
+    int lvl = 0;
+
     Player player;
     Texture bg;
     //Texture wan;
 
     
-    public PlayScreen(Game game) {
+    public PlayScreen(Game game, int lvl) {
         // 640 480
         this.game = game;
+        this.lvl = lvl;
 
         bg = new Texture("map.png");
         //wan = new Texture("shot.png");
@@ -52,7 +55,7 @@ public class PlayScreen implements Screen {
         rayHandler.setAmbientLight(0f, 0f, 0f, 0.1f);
         player = new Player(world, camera, rayHandler);
 
-        map = new Map(world, rayHandler);
+        map = new Map(world, rayHandler, game, lvl);
         map.generate();
     }
 

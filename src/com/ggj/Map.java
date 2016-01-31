@@ -11,6 +11,8 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
+import com.ggj.Screens.PlayScreen;
+import com.ggj.Screens.WinLose;
 
 
 public class Map {
@@ -19,6 +21,8 @@ public class Map {
     public int numOfHouses = 10;
     public int houseSizeX = 31;
     public int houseSizeY = 25;
+
+    int lvl;
 
     int numOfPagans = 5;
     int numOfEnemies = 5;
@@ -32,8 +36,10 @@ public class Map {
     World world;
     RayHandler rayHandler;
 
-    public Map(World world, RayHandler rayHandler){
+    public Map(World world, RayHandler rayHandler, Game game, int lvl){
         this.world = world;
+        this.lvl = lvl;
+        this.game = game;
         houses = new Array<House>();
         pagans = new Array<Pagan>();
         enemies = new Array<Enemy>();
@@ -108,8 +114,14 @@ public class Map {
         //enemy.update(player.body.getPosition().x, player.body.getPosition().y);
 
         // pagans
+        int score = 0;
         for(int i=0; i<numOfPagans; i++){
             pagans.get(i).update(batch, Gdx.graphics.getDeltaTime(), waterBody);
+            if(pagans.get(i).isChristian) score++;
+        }
+        if(score == pagans.size) {
+            if(lvl == 2) game.setScreen(new WinLose(game, true));
+            else game.setScreen(new PlayScreen(game, lvl+1));
         }
 
         // enemies

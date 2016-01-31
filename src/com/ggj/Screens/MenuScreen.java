@@ -43,7 +43,7 @@ public class MenuScreen implements Screen {
         Rectangle bounds1 = new Rectangle((Gdx.graphics.getWidth() - 300)/2, (Gdx.graphics.getHeight() - 450) / 2, 300, 125);
 
         if(bounds.contains(tmp.x, tmp.y) && Gdx.input.isTouched()){
-            game.setScreen(new PlayScreen(game));
+            game.setScreen(new PlayScreen(game, 0));
         }
 
         if(bounds1.contains(tmp.x, tmp.y) && Gdx.input.isTouched()){

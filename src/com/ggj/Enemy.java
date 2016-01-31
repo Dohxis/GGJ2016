@@ -15,7 +15,7 @@ public class Enemy extends Sprite {
     int enemySize = 10;
     int enemySpeed = 50;
 
-    int killRadius = 40;
+    int killRadius = 50;
 
     boolean hasMoved = false;
     double timeSinceMoved = 0;
