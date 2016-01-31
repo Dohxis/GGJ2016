@@ -1,9 +1,12 @@
 package com.ggj;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.*;
 
-public class Enemy {
+public class Enemy extends Sprite {
     World world;
     Body body;
 
@@ -20,14 +23,17 @@ public class Enemy {
     boolean change = false;
 
     public Enemy(World world, int x, int y){
+        super(new Texture("Pagonis2.png"));
         this.world = world;
         this.x = x;
         this.y = y;
         createCollision(x, y);
     }
 
-    public void update(float playerX, float playerY){
+    public void update(SpriteBatch batch, float playerX, float playerY){
         moved();
+        draw(batch);
+        setPosition(body.getPosition().x - 20, body.getPosition().y - 33);
         follow(playerX, playerY);
     }
 
@@ -100,7 +106,7 @@ public class Enemy {
 
         FixtureDef fixtureDef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(enemySize, enemySize);
+        shape.setAsBox(10, 29);
 
         fixtureDef.shape = shape;
         body.createFixture(fixtureDef);

@@ -4,13 +4,15 @@ package com.ggj;
 import box2dLight.PointLight;
 import box2dLight.RayHandler;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
-public class Pagan {
+public class Pagan extends Sprite {
+
     boolean isIdle = true;
     boolean isChristian = false;
     int direction = 2;
@@ -21,16 +23,18 @@ public class Pagan {
     PointLight light;
 
     int adultSpeed = 30;
-    int adultSize = 10;
+    Vector2 adultSize = new Vector2(9, 21);
 
     int childSpeed = 60;
-    int childSize = 7;
+    Vector2 childSize = new Vector2(9, 21);
 
     int paganSpeed;
-    int paganSize;
+    Vector2 paganSize;
 
 
     public Pagan(World world, int x, int y, RayHandler rayHandler, boolean isAdult){
+        super(new Texture("Pagonis2.png"));
+        setScale(.7f, .7f);
         this.world = world;
         this.rayHandler = rayHandler;
         if(isAdult){
@@ -52,16 +56,19 @@ public class Pagan {
 
         FixtureDef fixtureDef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(paganSize, paganSize);
+        shape.setAsBox(paganSize.x, paganSize.y);
 
         fixtureDef.shape = shape;
         body.createFixture(fixtureDef);
     }
 
     public void update(SpriteBatch batch, double deltaTime, Body waterBody){
+        draw(batch);
+        setPosition(body.getPosition().x - 20, body.getPosition().y - 33);
+
         time += deltaTime;
 
-        Rectangle paganRekt = new Rectangle(body.getPosition().x-25, body.getPosition().y-25, paganSize+50, paganSize+50);
+        Rectangle paganRekt = new Rectangle(body.getPosition().x-25, body.getPosition().y-25, paganSize.x+50, paganSize.y+50);
         Rectangle rekt = new Rectangle(waterBody.getPosition().x, waterBody.getPosition().y, 5, 5);
 
         if(!isChristian && paganRekt.overlaps(rekt)){

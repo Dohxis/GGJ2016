@@ -112,7 +112,7 @@ public class Map {
 
         // enemies
         for(int i=0; i<numOfEnemies; i++){
-            enemies.get(i).update(playerX, playerY);
+            enemies.get(i).update(batch, playerX, playerY);
         }
     }
 }

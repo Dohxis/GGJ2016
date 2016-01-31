@@ -34,6 +34,7 @@ public class Player extends Sprite {
 
     public Player(World world, OrthographicCamera camera, RayHandler rayHandler){
         super(new Texture("Pagonis.png"));
+        setScale(0.9f, 0.9f);
         this.rayHandler = rayHandler;
         this.world = world;
         this.camera = camera;
@@ -51,7 +52,7 @@ public class Player extends Sprite {
 
         FixtureDef fixtureDef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(10, 29);
+        shape.setAsBox(10, 28);
 
         fixtureDef.shape = shape;
         body.createFixture(fixtureDef);
