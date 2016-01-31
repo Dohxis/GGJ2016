@@ -15,7 +15,8 @@ public class Enemy extends Sprite {
     int enemySize = 10;
     int enemySpeed = 50;
 
-    int killRadius = 50;
+    int killRadiusX = 20;
+    int killRadiusY = 50;
 
     boolean hasMoved = false;
     double timeSinceMoved = 0;
@@ -41,7 +42,7 @@ public class Enemy extends Sprite {
         draw(batch);
         setPosition(body.getPosition().x - 20, body.getPosition().y - 33);
         follow(playerX, playerY);
-        if(distance2d(body.getPosition().x, body.getPosition().y, playerX, playerY) <= killRadius){
+        if(Math.abs(playerX - body.getPosition().x) <= killRadiusX && Math.abs(playerY - body.getPosition().y) <= killRadiusY){
             game.setScreen(new WinLose(game, false));
         }
     }

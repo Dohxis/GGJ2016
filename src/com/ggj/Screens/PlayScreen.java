@@ -50,7 +50,6 @@ public class PlayScreen implements Screen {
 
         box2DDebugRenderer = new Box2DDebugRenderer();
 
-
         rayHandler = new RayHandler(world);
         rayHandler.setAmbientLight(0f, 0f, 0f, 0.1f);
         player = new Player(world, camera, rayHandler);
@@ -84,7 +83,7 @@ public class PlayScreen implements Screen {
         //game.batch.draw(wan, 2, Gdx.graphics.getHeight() - 52, 50, 50);
         game.batch.end();
 
-        box2DDebugRenderer.render(world, camera.combined);
+        //box2DDebugRenderer.render(world, camera.combined);
         rayHandler.setCombinedMatrix(camera);
         rayHandler.updateAndRender();
         game.batch.setProjectionMatrix(camera.combined);
