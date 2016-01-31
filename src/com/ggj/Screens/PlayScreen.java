@@ -30,11 +30,9 @@ public class PlayScreen implements Screen {
     Map map;
 
     Player player;
-    Enemy enemy;
     Texture bg;
 
-    Pagan pagan;
-
+    
     public PlayScreen(Game game) {
         // 640 480
         this.game = game;
@@ -48,16 +46,12 @@ public class PlayScreen implements Screen {
         box2DDebugRenderer = new Box2DDebugRenderer();
 
 
-        enemy = new Enemy(world, 250, 250);
-
         rayHandler = new RayHandler(world);
         rayHandler.setAmbientLight(0f, 0f, 0f, 0.1f);
         player = new Player(world, camera, rayHandler);
 
         map = new Map(world, rayHandler);
         map.generate();
-
-        pagan = new Pagan(world, 100, 50, rayHandler, true);
     }
 
     @Override
@@ -77,13 +71,8 @@ public class PlayScreen implements Screen {
         game.batch.begin();
         player.render(game.batch);
 
-        enemy.update(player.body.getPosition().x, player.body.getPosition().y);
-
-
-
         game.batch.draw(bg,0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        map.renderAll(game.batch);
-        pagan.update(game.batch, Gdx.graphics.getDeltaTime(), player.water.body);
+        map.renderAll(game.batch, player.water.body, player.body.getPosition().x, player.body.getPosition().y);
         player.water.render(game.batch);
         game.batch.end();
 
