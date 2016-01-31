@@ -76,24 +76,24 @@ public class Player extends Sprite {
             body.applyLinearImpulse(new Vector2(0, SPEED), body.getWorldCenter(), true);
             go.set(0, speed_water);
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.S)){
+        else if(Gdx.input.isKeyPressed(Input.Keys.S)){
             body.applyLinearImpulse(new Vector2(0, -SPEED), body.getWorldCenter(), true);
             go.set(0, -speed_water);
 
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.A)){
+        else if(Gdx.input.isKeyPressed(Input.Keys.A)){
             body.applyLinearImpulse(new Vector2(-SPEED, 0), body.getWorldCenter(), true);
             if(!isFlipX())
                 setFlip(true, false);
             go.set(-speed_water, 0);
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.D)){
+        else if(Gdx.input.isKeyPressed(Input.Keys.D)){
             body.applyLinearImpulse(new Vector2(SPEED, 0), body.getWorldCenter(), true);
             if(isFlipX())
                 setFlip(false, false);
             go.set(speed_water, 0);
         }
-        if(!Gdx.input.isKeyPressed(Input.Keys.S) && !Gdx.input.isKeyPressed(Input.Keys.W) && !Gdx.input.isKeyPressed(Input.Keys.D) && !Gdx.input.isKeyPressed(Input.Keys.A)){
+        else if(!Gdx.input.isKeyPressed(Input.Keys.S) && !Gdx.input.isKeyPressed(Input.Keys.W) && !Gdx.input.isKeyPressed(Input.Keys.D) && !Gdx.input.isKeyPressed(Input.Keys.A)){
             body.setLinearVelocity(new Vector2(0, 0));
         }
     }

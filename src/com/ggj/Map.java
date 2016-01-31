@@ -25,7 +25,7 @@ public class Map {
     int lvl;
 
     int numOfPagans = 5;
-    int numOfEnemies = 5;
+    int numOfEnemies = 2;
 
     Game game;
 
@@ -40,6 +40,21 @@ public class Map {
         this.world = world;
         this.lvl = lvl;
         this.game = game;
+
+        if(lvl == 0){
+            numOfPagans = 5;
+            numOfEnemies = 2;
+        }
+        else if(lvl == 1){
+            numOfPagans = 7;
+            numOfEnemies = 3;
+        }
+        else if(lvl == 2){
+            numOfPagans = 10;
+            numOfEnemies = 5;
+        }
+
+
         houses = new Array<House>();
         pagans = new Array<Pagan>();
         enemies = new Array<Enemy>();
@@ -79,7 +94,7 @@ public class Map {
 
         // enemies
         for(int i=0; i<numOfEnemies; i++){
-            enemies.add(new Enemy(world, 10 + (int)(Math.random() * ((width-10 - 10) + 1)), 10 + (int)(Math.random() * ((height-10 - 10) + 1)), game));
+            enemies.add(new Enemy(world, 100 + (int)(Math.random() * ((width-10 - 100) + 1)), 10 + (int)(Math.random() * ((height-100 - 10) + 1)), game));
         }
 
     }
